@@ -1,0 +1,409 @@
+// reset and helpers
+@import "reset";
+@import "helper-classes";
+
+// Constants
+$transition-time-ease: .2s ease;
+$breakpoint-mobile: 500px;
+
+// Mixins
+@import "mixins";
+
+// fonts
+@import "fonts";
+
+// Chartist
+@import "chartist";
+
+// Leaflet
+@import "leaflet";
+
+/*********
+GENERAL STYLES
+*********/
+
+/*Colors*/
+$slate: #58646D;
+$blue: #5683B0;
+$grey-dark: #2E3338;
+$grey-light: #9FB3C3;
+$red-dark: #8c1515;
+$red-light: lighten($red-dark, 10%);
+
+body {width: 100%;
+	height: 100%;
+	font-size: 1em;
+	padding: 0 10px;
+	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
+	box-sizing: border-box;}
+
+h1 {
+	font-family: 'Oswald', 'Helvetica', sans-serif;
+	font-weight: 500;
+	font-size: 1.25em;
+	color: $slate;
+	text-align: center;
+	margin-bottom: .5em;
+}
+
+
+// temp elements to simulate wrapper
+.sim-wrapper {
+	max-width: 1050px;
+	margin: 0 auto;
+
+	p {
+		line-height: 1.5;
+		font-size: 18px;
+	}
+
+	.chart-wrapper {
+		float: right;
+		width: 40%;
+	}
+}
+
+/*********
+MAP
+**********/
+
+.map-wrapper {
+	position: relative;
+}
+
+#map {
+	width: 100%;
+	height: 500px;
+}
+
+.leaflet-popup-content {
+	font-family: 'Source Sans Pro', 'Helvetica', sans-serif;
+
+	h4 {
+		font-size: 1em;
+		margin-bottom: 1em;
+	}
+
+	p {
+		margin: 0 0 .75em 0;
+	}
+
+}
+
+.map-info {
+	width: 22%;
+	box-sizing: border-box;
+	padding: 1.5em;
+	position: absolute;
+	top: 100%;
+	transform: translateY(calc(-100% - 1.5em));
+	margin-left: 1.5em;
+	background-color: #fff;
+	box-shadow: 0 1px 5px rgba(0,0,0,.2);
+
+	@include bp(700px) {
+		width: 35%;
+	}
+
+	@include bp(bp-mobile) {
+		position: static;
+		transform: translateY(0);
+		margin: 0;
+		width: 100%;
+		box-shadow: none;
+		padding: 1em 0;
+	}
+
+	p {
+		margin-bottom: 1em;
+		line-height: 1.3;
+	}
+}
+
+.map-key {
+	list-style: none;
+	width: 100%;
+	display: table;
+	margin-top: .5em;
+	@include clearfix;
+
+	li {
+		display: table-cell;
+		width: 20%;
+		font-size: .7em;
+		text-align: center;
+		color: $grey-dark;
+
+		&::before {
+			content: '';
+			display: block;
+			width: 100%;
+			height: 15px;
+			background-color: #000;
+			border: 2px solid #fff;
+		}
+
+		&:first-child::before {
+			background-color: #5683B0;
+		}
+		&:nth-child(2)::before {
+			background-color: #fdcc8a;
+		}
+		&:nth-child(3)::before {
+			background-color: #fc8d59;
+		}
+		&:nth-child(4)::before {
+			background-color: #e34a33;
+		}
+		&:nth-child(5)::before {
+			background-color: #b30000;
+		}
+	}	
+}
+
+/*********
+YEAR SLIDER
+**********/
+
+.year-slider {
+	margin-top: 2em;
+	border-top: 6px solid $grey-light;
+
+	li {
+		list-style: none;
+		display: inline-block;
+		width: 26%;
+		box-sizing: border-box;
+		text-align: center;
+
+		a {
+			display: inline-block;
+			color: $grey-light;
+			padding-top: .8em;
+			position: relative;
+			transition: all $transition-time-ease;
+
+			&::before {
+				content: '';
+				display: block;
+				width: 14px;
+				height: 14px;
+				border-radius: 50%;
+				background-color: $grey-light;
+				border: 2px solid $grey-light;
+				position: absolute;
+				top: -.8em;
+				left: calc(50% - 8px);
+				transition: all $transition-time-ease;
+			}
+
+			&.current {
+				color: $red-dark;
+
+				&::before {
+					background-color: $red-light;
+					border-color: #fff;
+					width: 16px;
+					height: 16px;
+					transform: scale(1.5);
+				}
+			}
+
+			&:hover {
+				color: $red-light;
+			}
+		}
+
+
+		&:first-child {
+			text-align: left;
+			width: 10.25%;
+
+			a::before {
+				left: -1px;
+			}
+		}
+
+		&:last-child {
+			text-align: right;
+			width: 10%;
+			float: right;
+
+			a::before {
+				left: calc(100% - 16px);
+			}
+		}
+	}
+
+	@include bp(bp-mobile) {
+		font-size: .875em;
+
+		li {
+			width: 23%;
+
+			&:first-child, &:last-child {
+				width: 12%;
+			}
+		}
+
+	}
+}
+
+/*********
+LINE CHART
+**********/
+
+// set layout
+.chart-wrapper {
+	padding-left: 2em;
+}
+
+// set colors
+.ct-series-a .ct-line,
+.ct-series-a .ct-point {
+  stroke: $red-light;
+}
+
+.ct-series-b .ct-line,
+.ct-series-b .ct-point {
+  stroke: $blue;
+}
+
+// adjust labels
+.ct-label {
+	font-size: 1em;
+	color: $grey-light;
+}
+
+// legend
+.chart-legend {
+	@include clearfix;
+	text-align: center;
+
+	li {
+		display: inline-block;
+		list-style: none;
+		padding-left: 2em;
+		font-size: .875em;
+
+		&::before {
+			content: '';
+			display: inline-block;
+			width: 1em;
+			border-top: 6px solid $red-light;
+			vertical-align: 10%;
+			margin-right: .5em;
+		}
+
+		&.jobs {
+			color: $red-light;
+			padding-left: 0;
+
+			&::before {
+				border-color: $red-light;
+			}
+		}
+
+		&.housing {
+			color: $blue;
+
+			&::before {
+				border-color: $blue;
+			}
+		}
+	}
+}
+
+// chart info
+.chart-info {
+	@include clearfix;
+	margin-top: 1.5em;
+	list-style: none;
+
+	p, li {
+		font-size: .75em;
+		color: $slate;
+	}
+
+	li {
+		display: inline-block;
+		width: 33%;
+	}
+
+	.source {
+		font-style: italic;
+	}
+
+	.credit {
+		text-align: right;
+	}
+
+	.animation-control {
+		text-align: center;
+
+		a {
+			color: $grey-light;
+			display: inline-block;
+			position: relative;
+			padding-top: 2em;
+			transition: all $transition-time-ease;
+
+			&::before {
+				content: '\f04c';
+				@include font-icon;
+				position: absolute;
+				left: 50%;
+				font-size: 2em;
+				margin-left: -.4em;
+				margin-top: -1.2em;
+			}
+
+			&:hover {
+				color: $red-light;
+			}
+
+			&.paused::before {
+				content: '\f04b';
+			}
+		}
+	}
+
+	@include bp(bp-mobile) {
+		padding-top: 3.5em;
+		position: relative;
+
+		.animation-control {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+		}
+
+		.source, .credit {
+			width: 49%;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

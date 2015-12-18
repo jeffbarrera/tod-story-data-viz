@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Jobs and Housing in Silicon Valley | Jeff Barrera</title>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- Styles -->
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700|Oswald' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="assets/styles/style.css" />
+
+<!--Scripts-->
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="assets/data/jobs_housing.geojson" type="text/javascript"></script>
+<script src="assets/scripts/scripts.js"></script>
+
+
+</head>
+
+<body>
+<div class="map-wrapper">
+
+<div id="map"></div>
+
+<div class="map-info">
+	<p>Many Peninsula cities have an imbalance between jobs and housing, forcing people to commute longer distances to get to work.</p>
+
+	<h3>Jobs per housing unit:</h3>
+	<ul class="map-key">
+		<li>&lt; 1</li>
+		<li>1 - 1.5</li>
+		<li>1.5 - 2</li>
+		<li>2 - 2.5</li>
+		<li>&gt; 2.5</li>
+	</ul>
+</div>
+
+</div>
+
+<ul class="year-slider">
+	<li><a href="#" class="map-toggle-link" data-map-layer="2009">2009</a></li>
+	<li><a href="#" class="map-toggle-link" data-map-layer="2010">2010</a></li>
+	<li><a href="#" class="map-toggle-link" data-map-layer="2011">2011</a></li>
+	<li><a href="#" class="map-toggle-link" data-map-layer="2012">2012</a></li>
+	<li><a href="#" class="map-toggle-link" data-map-layer="2013">2013</a></li>
+</ul>
+
+<ul class="chart-info">
+	<li class="source">Source: US Census Bureau ACS and LEHD data</li>
+	<li class="animation-control"><a href="#">Pause Animation</a></li>
+	<li class="credit">Jeff Barrera/&#8202;Peninsula Press</li>
+</ul>
+
+</body>
+</html>
